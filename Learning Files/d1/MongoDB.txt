@@ -1,0 +1,74 @@
+Meet Code :
+
+hmz-wcgw-ene
+
+
+Depenancies :
+
+ES7+ React/Redux/React-Native snippets
+
+Thunder Client
+
+Spring Boot Extension Pack
+
+Extension Pack for Java
+
+
+MongoDB :
+
+// DB
+
+// Show all databases
+show dbs;
+
+// Create / Switch to database
+use ecomm
+
+// Drop current database
+db.dropDatabase()
+
+//Collections
+// Show all collections in current db
+db.ecomm.find()
+// Create collection
+db.createCollection("users")
+// Drop collection
+db.users.drop()
+
+// Document
+// Insert one document
+db.users.insertOne({name:"hello",age:20})
+// Insert many documents
+db.users.insertMany([
+{name:"a",age:20},
+{name:"b",age:21}
+])
+// Find all documents
+db.users.find()
+
+// Find with condition
+db.users.find({name:"a"})
+
+// Update one document
+db.users.updateOne({name:"a"}, {$set:{age:25}})
+
+// Delete one document
+
+db.users.deleteOne({name:"a"})
+
+//Insert Many 
+
+db.orders.insertMany([
+  {_id:201,userId:1,items:[{productId:101,qty:1,price:1200},{productId:102,qty:2,price:25}],totalAmount:1250,status:"shipped",createdAt:ISODate("2024-06-10")},
+  {_id:202,userId:2,items:[{productId:105,qty:1,price:900},{productId:106,qty:1,price:200}],totalAmount:1100,status:"pending",createdAt:ISODate("2024-06-15")},
+  {_id:203,userId:3,items:[{productId:103,qty:1,price:150},{productId:104,qty:4,price:10}],totalAmount:190,status:"delivered",createdAt:ISODate("2024-06-18")},
+  {_id:204,userId:1,items:[{productId:109,qty:1,price:60}],totalAmount:60,status:"shipped",createdAt:ISODate("2024-07-01")},
+  {_id:205,userId:5,items:[{productId:110,qty:2,price:120}],totalAmount:240,status:"delivered",createdAt:ISODate("2024-07-05")}
+])
+
+//Aggregate
+
+db.orders.aggregate([
+  { $group: { _id: "$userId", totalSpent: { $sum: "$totalAmount" } } }
+])
+

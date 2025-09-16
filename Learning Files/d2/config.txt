@@ -1,0 +1,38 @@
+// Product Model
+
+    id;
+    name;
+    description;
+    category;
+    tags;
+    price;
+    stock;
+
+
+// application properties
+
+spring.application.name=ecomm-server
+spring.data.mongodb.uri=mongodb+srv://max:1811321@in-aws.fppb02u.mongodb.net/?retryWrites=true&w=majority&appName=In-AWS
+spring.data.mongodb.database=mdb2
+server.port = 8080
+
+// Swagger dependency
+
+			<dependency>
+			    <groupId>org.springdoc</groupId>
+			    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			    <version>2.5.0</version>
+			</dependency>
+
+//DockerFile
+
+# Build stage
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Runtime stage
+FROM eclipse-temurin:21-jdk-jammy
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
